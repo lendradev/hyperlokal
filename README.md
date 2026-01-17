@@ -1,5 +1,5 @@
 # HyperLokal
-Platform Open Source untuk mencari usaha mikro kecil menengah di daerah sekitar kalian.
+Platform Open Source untuk UMKM mendapatkan pembeli atau para pembeli yang mencari produk atau usaha di sekitar mereka.
 
 ## License
 
