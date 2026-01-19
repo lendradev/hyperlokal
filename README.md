@@ -1,5 +1,6 @@
 # HyperLokal
-Platform Open Source untuk UMKM mendapatkan pembeli atau para pembeli yang mencari produk atau usaha di sekitar mereka.
+
+Platform Open Source untuk UMKM mendapatkan calon pembeli atau para pembeli yang mencari usaha di sekitar mereka.
 
 ## License
 
