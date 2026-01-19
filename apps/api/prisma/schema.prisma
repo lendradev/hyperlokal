@@ -34,6 +34,10 @@ model Business {
     description  String?
     businessLogo String?
 
+    // Operating hours
+    openHours  String?
+    closeHours String?
+
     // Location details
     address   String?
     city      String?
