@@ -5,3 +5,64 @@ generator client {
 datasource db {
     provider = "postgresql"
 }
+
+model User {
+    id         String     @id @default(uuid())
+    email      String     @unique
+    name       String?
+    password   String
+    businesses Business[]
+    createdAt  DateTime   @default(now())
+}
+
+enum BusinessStatus {
+    ACTIVE
+    INACTIVE
+    SUSPENDED
+}
+
+model Business {
+    // Basic info
+    id           String  @id @default(uuid())
+    name         String
+    description  String?
+    businessLogo String?
+
+    // Location details
+    address   String?
+    city      String?
+    state     String?
+    latitude  Float?
+    longitude Float?
+
+    // Contact info
+    phoneNumber String?
+    website     String?
+    email       String?
+
+    // Operational details
+    status    BusinessStatus @default(ACTIVE)
+    verified  Boolean        @default(false)
+    ownerId   String
+    owner     User           @relation(fields: [ownerId], references: [id])
+    createdAt DateTime       @default(now())
+
+    // Relations
+    catalogs Catalog[]
+
+    @@index([ownerId])
+}
+
+enum CatalogType {
+    PRODUCT
+    SERVICE
+}
+
+model Catalog {
+    id         String      @id @default(uuid())
+    type       CatalogType
+    name       String
+    businessId String
+    business   Business    @relation(fields: [businessId], references: [id])
+    createdAt  DateTime    @default(now())
+}
