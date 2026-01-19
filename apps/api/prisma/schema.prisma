@@ -7,12 +7,18 @@ datasource db {
 }
 
 model User {
-    id         String     @id @default(uuid())
-    email      String     @unique
-    name       String?
+    // Basic info
+    id    String  @id @default(uuid())
+    email String  @unique
+    name  String?
+
+    // System info  
     password   String
+    // Relations
     businesses Business[]
-    createdAt  DateTime   @default(now())
+
+    // Timestamps
+    createdAt DateTime @default(now())
 }
 
 enum BusinessStatus {
@@ -41,28 +47,24 @@ model Business {
     email       String?
 
     // Operational details
-    status    BusinessStatus @default(ACTIVE)
-    verified  Boolean        @default(false)
-    ownerId   String
-    owner     User           @relation(fields: [ownerId], references: [id])
-    createdAt DateTime       @default(now())
+    status   BusinessStatus @default(ACTIVE)
+    verified Boolean        @default(false)
+    ownerId  String
+    owner    User           @relation(fields: [ownerId], references: [id])
 
-    // Relations
-    catalogs Catalog[]
+    // Timestamps
+    createdAt   DateTime      @default(now())
+    socialLinks SocialLinks[]
 
     @@index([ownerId])
 }
 
-enum CatalogType {
-    PRODUCT
-    SERVICE
-}
-
-model Catalog {
-    id         String      @id @default(uuid())
-    type       CatalogType
-    name       String
+model SocialLinks {
+    id         String   @id @default(uuid())
     businessId String
-    business   Business    @relation(fields: [businessId], references: [id])
-    createdAt  DateTime    @default(now())
+    business   Business @relation(fields: [businessId], references: [id])
+    platform   String
+    url        String
+
+    createdAt DateTime @default(now())
 }
